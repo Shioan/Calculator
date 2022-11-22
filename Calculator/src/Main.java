@@ -9,7 +9,7 @@ public class Main {
         //Просим пользователя ввести выражение и определяем его
         System.out.println("""
                 Введите арифметическое выражение:\s
-                Можно писать арабские и римские цифры от1 до 10 включительно;
+                Можно писать арабские и римские цифры от 1 до 10 включительно;
                 Используйте только один знак +, -, * или /, чтобы посчитать.
                 Начните ввод в строке ниже:
                 """);
@@ -26,8 +26,6 @@ public class Main {
         Converter converter = new Converter();
         String[] actForUser = {"+", "-", "/", "*"};
         String[] actArray = {"\\+", "-", "/", "\\*"};
-
-
         //Проверяем кол-во
         int count = 0;
         for (int i = 0; i < input.length(); i++) {
@@ -58,8 +56,10 @@ public class Main {
 
 
         //Определяем, находятся ли числа в одном формате (оба римские или оба арабские)
+        int a, b;
+
         if (converter.isRoman(data[0]) == converter.isRoman(data[1])) {
-            int a, b;
+
 
 
             //Определяем, римские ли это числа
@@ -91,6 +91,8 @@ public class Main {
                     default -> a / b;
                 };
 
+                input = String.valueOf(result);
+
 
                 //Если числа были римские - возвращаем результат римскими цифрами
                 if (isRoman) {
@@ -109,6 +111,10 @@ public class Main {
             }
         }
         //Исключение, если используются разныве системы счисления
-        throw new Exception("Используются разные системы счисления!");
+        else if (converter.isRoman(data[0]) != converter.isRoman(data[1])) {
+        throw new Exception("Используются разные системы счисления!"); }
+
+
+        return input;
     }
 }
